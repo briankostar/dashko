@@ -2,10 +2,44 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <script type="text/javascript" src="../vendor/angular/angular.min.js"></script>
+    <script type="text/javascript" src="../vendor/d3/d3.min.js"></script>
+    <title>DashKo</title>
+    <style type="text/css">
 
+    body
+    {
+      padding-top: 50px;
+      padding-left: 100px;
+    }
+
+    .bar
+    {
+      display: inline-block;
+      width: 20px;
+      height: 75px; /* Gets overriden by D3-assigned height below */
+      margin-right: 2px;
+      background-color: teal;
+    }
+
+  </style>
   </head>
 
   <body>
+  HELLO!!
+
+  <script type="text/javascript">
+
+  	var data = [ 2, 5, 7, 8, 9, 13];
+  	d3.select('body').selectAll('div')
+  	.data(data)
+  	.enter()
+  	.append('div')
+  	.attr('class', 'bar')
+  	.style('height', function(d){
+  		return d * 4 + 'px';
+  	});
+  </script>
 
   </body>
 </html>
