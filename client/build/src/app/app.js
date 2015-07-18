@@ -1,0 +1,1 @@
+var test="hello this is app.js",test2=function(){console("hihihi ")},test3=" testing three!";

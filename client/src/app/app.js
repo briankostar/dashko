@@ -1,3 +1,7 @@
-/**
- * Created by brian on 2015-07-18.
- */
+var test = "hello this is app.js";
+var test2 = function(){
+  console('hihihi ')
+}
+
+
+var test3 = ' testing three!'
