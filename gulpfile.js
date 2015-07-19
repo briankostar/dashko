@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var jshint = require('gulp-jshint');
 var minifyCss = require("gulp-minify-css");
 var uglify = require("gulp-uglify");
 var concat = require("gulp-concat");
@@ -7,6 +8,13 @@ var paths = {
   scripts: './client/src/app/**/*.js',
   styles: './client/src/sass/**/*.css'
 };
+
+// Lint Task
+gulp.task('lint', function() {
+  gulp.src(paths.scripts)
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
+});
 
 gulp.task('concat-uglify-js', function () {
   gulp.src(paths.scripts)
@@ -23,8 +31,8 @@ gulp.task('concat-minify-css', function () {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(paths.scripts, ['concat-uglify-js']);
+  gulp.watch(paths.scripts, ['lint', 'concat-uglify-js']);
   gulp.watch(paths.styles, ['concat-minify-css']);
 });
 
-gulp.task('default', ['concat-uglify-js', 'concat-minify-css']);
+gulp.task('default', ['watch', 'lint', 'concat-uglify-js', 'concat-minify-css']);

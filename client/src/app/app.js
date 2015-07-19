@@ -1,7 +1,7 @@
-var test = "hello this is app.js";
+var test = 'hello this is app.js';
 var test2 = function(){
-  console('hihihi ')
-}
+  console('hihihi heys');
+};
 
 
-var test3 = ' testing three!'
+var test3 = ' testing three!';
