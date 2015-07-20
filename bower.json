@@ -23,7 +23,10 @@
   "devDependencies": {
     "angular-mocks": "~1.4.1",
     "oclazyload": "~1.0.1",
-    "d3": "~3.5.6"
+    "d3": "~3.5.6",
+    "bootstrap": "~3.3.5",
+    "jquery": "~2.1.4",
+    "admin-lte": "~2.2.0"
   },
   "resolutions": {
     "angular": "~1.4.1"
