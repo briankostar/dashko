@@ -6,102 +6,13 @@
   <script type="text/javascript" src="../vendor/d3/d3.min.js"></script>
   <script type="text/javascript" src="../vendor/lodash/lodash.min.js"></script>
   <title>DashKo</title>
-  <style type="text/css">
 
-    body {
-      padding-top: 50px;
-      padding-left: 100px;
-    }
-
-    .bar {
-      display: inline-block;
-      width: 20px;
-      height: 75px; /* Gets overriden by D3-assigned height below */
-      margin-right: 2px;
-      /*svg uses fill, not backgorund*/
-      /*fill: teal;*/
-    }
-
-    #chartArea {
-      width: 400px;
-      height: 300px;
-      background-color: gray;
-    }
-
-  </style>
 </head>
 
 <body>
-SVG chart to scale:
-<div id="chartArea"></div>
-
-<script type="text/javascript">
-
-  //  var data = [2, 5, 6, 8, 9, 13, 25, 27, 50, 80];
-  var data = _.map(_.range(55), function (i) {
-    return Math.random() * 50;
-//    x: Math.random * 50;
-//    y: Math.random * 50;
-//    r: Math.random * 50;
-  });
-
-  var margins = {top: 0, right: 0, bottom:0, left:0}
-  var w = 400
-  var h = 300;
 
 
-  //append new element as child
-  var svg = d3.select('#chartArea').append('svg')
-    .attr('width', w)
-    .attr('height', h);
 
-  //input domain gets scaled to range. linear has min max
-  var yScale = d3.scale.linear()
-    .domain([0, d3.max(data) * 1.1])//d3.max find max value in arr and returns it
-    .range([0, h]);
-
-  var colorScale = d3.scale.quantile()//quantize evenly distributes. quantile gives more control
-    .domain([0, data.length / 4, data.length])// d3.max(data) or data.length
-    .range(['yellow', 'orange', 'red']); //scales from yellow to red color
-
-  //sacle that orders things. map according to position
-  var xScale = d3.scale.ordinal()
-    .domain(data)
-    .rangeBands([0, w], 0.1, 0.3); //0.2 is paddinb btw band, 0 is padding outside
-
-
-  var multiplier = 14;
-
-  //select body element, selected all div element in body. rect is svg element
-  svg.selectAll('rect')
-    //joins selected element with element in data
-    .data(data)
-    //enter each selection
-    .enter()
-    //add a div
-    .append('rect')
-    //add attr -- class=bar
-    .attr('class', 'bar')
-    //set x position for each element. multiply by index
-    .attr('x', function (d, i) {
-      return xScale(d); //i * 22
-    })
-    //set y position
-    .attr('y', function (d) {
-      //flip
-      return h - yScale(d)
-    })
-    //breaks if its attr
-    .style('width', xScale.rangeBand())
-    //add style. d is the data for the element
-    //style becomes attr for svg
-    .style('height', function (d) {
-      return yScale(d)
-    })
-    .attr('fill', function(d, i){
-      return colorScale(i)
-    })
-</script>
 
 </body>
 </html>
