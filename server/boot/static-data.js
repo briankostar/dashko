@@ -1,14 +1,13 @@
 module.exports = function (app) {
+  //this delete the data in the server and makes new?
   app.dataSources.mongoLab.automigrate('Log', function (err) {
     if (err) throw err;
 
     app.models.Log.create([
       {
         "date": new Date(),
-        "type": "exercise",
-        "value": 1,
-        "logger": {"object":"I'm object"},
-        "group": {"object":"I'm object"}
+        "type": "commit to github",
+        "value": 2
       }
     ], function (err, logs) {
       if (err) throw err;
