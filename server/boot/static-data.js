@@ -2,13 +2,13 @@ module.exports = function (app) {
   app.dataSources.mongoLab.automigrate('Log', function (err) {
     if (err) throw err;
 
-    app.models.Logs.create([
+    app.models.Log.create([
       {
         "date": new Date(),
         "type": "exercise",
         "value": 1,
-        "logger": 2,
-        "group": 3
+        "logger": {"object":"I'm object"},
+        "group": {"object":"I'm object"}
       }
     ], function (err, logs) {
       if (err) throw err;
