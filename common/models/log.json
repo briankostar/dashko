@@ -1,6 +1,6 @@
 {
-  "name": "log",
-  "plural": "logs",
+  "name": "Log",
+  "plural": "Logs",
   "base": "PersistedModel",
   "idInjection": true,
   "properties": {
@@ -17,12 +17,10 @@
       "required": true
     },
     "logger": {
-      "type": "object",
-      "required": true
+      "type": "object"
     },
     "group": {
-      "type": "object",
-      "required": true
+      "type": "object"
     }
   },
   "validations": [],

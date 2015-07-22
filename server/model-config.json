@@ -26,7 +26,11 @@
     "dataSource": "db",
     "public": false
   },
-  "log": {
+  "Log": {
+    "dataSource": "mongoLab",
+    "public": true
+  },
+  "Group": {
     "dataSource": "mongoLab",
     "public": true
   }

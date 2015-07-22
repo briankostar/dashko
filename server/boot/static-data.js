@@ -1,18 +1,22 @@
-module.exports = function(app) {
-  //app.dataSources.mongoLab.automigrate('Log', function(err) {
-  //  if (err) throw err;
-  //
-  //  app.models.CoffeeShop.create([
-  //    {name: 'Bel Cafe', city: 'Vancouver'},
-  //    {name: 'Three Bees Coffee House', city: 'San Mateo'},
-  //    {name: 'Caffe Artigiano', city: 'Vancouver'},
-  //  ], function(err, coffeeShops) {
-  //    if (err) throw err;
-  //
-  //    console.log('Models created: \n', coffeeShops);
-  //  });
-  //});
-};
+module.exports = function (app) {
+  app.dataSources.mongoLab.automigrate('Log', function (err) {
+    if (err) throw err;
+
+    app.models.Logs.create([
+      {
+        "date": new Date(),
+        "type": "exercise",
+        "value": 1,
+        "logger": 2,
+        "group": 3
+      }
+    ], function (err, logs) {
+      if (err) throw err;
+
+      console.log('Models created: \n', logs);
+      });
+    });
+  };
 
 //var async = require('async');
 //
