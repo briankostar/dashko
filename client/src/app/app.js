@@ -1,7 +1,7 @@
-var test = 'hello this is app.js';
-var test2 = function(){
-  console('hihihi heys');
-};
+angular.module('dashKo', ['ngResource', 'lbServices', 'ui.router'])
+
+.config(function (LoopBackResourceProvider) {
+  LoopBackResourceProvider.setUrlBase('https://localhost:3000/api/v1');
+})
 
 
-var test3 = ' testing three!';
