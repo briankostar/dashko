@@ -12,11 +12,11 @@
   },
   "AccessToken": {
     "dataSource": "mongoLab",
-    "public": true
+    "public": false
   },
   "ACL": {
     "dataSource": "mongoLab",
-    "public": true
+    "public": false
   },
   "RoleMapping": {
     "dataSource": "mongoLab",

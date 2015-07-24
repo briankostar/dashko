@@ -3,6 +3,8 @@ var jshint = require('gulp-jshint');
 var minifyCss = require("gulp-minify-css");
 var uglify = require("gulp-uglify");
 var concat = require("gulp-concat");
+var loopbackAngular = require('gulp-loopback-sdk-angular');
+var rename = require('gulp-rename');
 
 var paths = {
   scripts: './client/src/app/**/*.js',
@@ -35,4 +37,11 @@ gulp.task('watch', function() {
   gulp.watch(paths.styles, ['concat-minify-css']);
 });
 
-gulp.task('default', ['watch', 'lint', 'concat-uglify-js', 'concat-minify-css']);
+gulp.task('lb', function () {
+   return gulp.src('./server/server.js')
+    .pipe(loopbackAngular())
+    .pipe(rename('lb-services.js'))
+    .pipe(gulp.dest('./client/src/common'));
+});
+
+gulp.task('default', ['watch', 'lint', 'concat-uglify-js', 'concat-minify-css', 'lb']);
