@@ -3,7 +3,7 @@
   "base": "PersistedModel",
   "idInjection": true,
   "properties": {
-    "name": {
+    "description": {
       "type": "string"
     }
   },
