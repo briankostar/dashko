@@ -1,7 +1,7 @@
 module.exports = function (app) {
 
   //automigrate renews schema objects, autoupdate keeps it
-  app.dataSources.mongoLab.autoupdate('Log', function (err) {
+  app.dataSources.mongoLab.automigrate('Log', function (err) {
     if (err) throw err;
 
     var Log = app.models.Log;
@@ -9,7 +9,7 @@ module.exports = function (app) {
     Log.create([
       {
         "date": new Date(),
-        "type": "commit to github",
+        "unit": "time(s)",
         "value": 2
       }
     ], function (err, logs) {

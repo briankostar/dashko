@@ -8,19 +8,13 @@
       "type": "date",
       "required": true
     },
-    "type": {
+    "unit": {
       "type": "string",
       "required": true
     },
     "value": {
       "type": "number",
       "required": true
-    },
-    "logger": {
-      "type": "object"
-    },
-    "group": {
-      "type": "object"
     }
   },
   "validations": [],
