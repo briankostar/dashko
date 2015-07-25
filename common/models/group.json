@@ -8,7 +8,18 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "logs": {
+      "type": "hasMany",
+      "model": "Log",
+      "foreignKey": ""
+    },
+    "user": {
+      "type": "belongsTo",
+      "model": "User",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": []
 }
