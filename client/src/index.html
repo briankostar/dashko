@@ -275,7 +275,7 @@ desired effect
     </section>
 
     <!-- Main content -->
-    <section class="content">
+    <section class="content" ng-controller="AppCtrl">
 
       <ui-view></ui-view>
       get groups, display in box
@@ -284,7 +284,9 @@ desired effect
 
       GROUPS:
 
-
+      <div>GROUPS:
+    {{groups}}
+      </div>
 
       <!-- Your Page Content Here -->
 

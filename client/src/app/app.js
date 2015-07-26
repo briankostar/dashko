@@ -10,7 +10,7 @@ angular.module('dashKo', ['ngResource', 'lbServices', 'ui.router'])
       .state('home', {
         url: "/",
         template: "<div>HOME</div>",
-        controller: 'appCtrl'
+        controller: 'AppCtrl'
       });
       //.state('state1.list', {
       //  url: "/list",
@@ -23,12 +23,10 @@ angular.module('dashKo', ['ngResource', 'lbServices', 'ui.router'])
 
   .factory('lbAPI', ['Log', 'Group', function (Log, Group) {
     var getLogs = function () {
-      console.log('calling and returning promise..')
       return Log.find().$promise;
     };
 
     var getGroups = function () {
-      console.log('calling and returning promise..')
       return Group.find().$promise;
     };
 
@@ -39,17 +37,24 @@ angular.module('dashKo', ['ngResource', 'lbServices', 'ui.router'])
     }
   }])
 
-.controller('appCtrl', ['$scope', 'lbAPI', function($scope, lbAPI){
-    lbAPI.getLogs().then(function(suc){
-      console.log('GOT LOGS', suc)
-    });
+.controller('AppCtrl', ['$scope', 'lbAPI', function($scope, lbAPI){
+    //lbAPI.getLogs().then(function(suc){
+    //  console.log('GOT LOGS', suc)
+    //});
 
     //should prob make group model
-    //
+
+    //get groups
+    //display each groups
+
+    //when clicked, and w input, create a log -- need
 
     lbAPI.getGroups().then(function(suc){
-      console.log('GOT GROUPS', suc)
+      console.log('Get groups', suc)
+      $scope.groups = suc;
     })
+
+
 
 
   }]);

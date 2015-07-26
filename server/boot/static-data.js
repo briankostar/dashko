@@ -69,6 +69,10 @@ module.exports = function(app) {
           "id": "55b45e253d0f62383e8af029",
           "name": "exercise",
           "description": "Daily exercise in minutes"
+        },
+        {
+          "name": "programming",
+          "description": "Programming amount in hours"
         }
       ], cb);
     });
