@@ -1085,6 +1085,12 @@ module.factory(
       { 'id': '@id' },
       {
 
+        // INTERNAL. Use Log.group() instead.
+        "prototype$__get__group": {
+          url: urlBase + "/Logs/:id/group",
+          method: "GET"
+        },
+
         /**
          * @ngdoc method
          * @name lbServices.Log#create
@@ -1467,6 +1473,65 @@ module.factory(
           url: urlBase + "/Logs/:id",
           method: "PUT"
         },
+
+        // INTERNAL. Use Group.logs.findById() instead.
+        "::findById::Group::logs": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Groups/:id/logs/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Group.logs.destroyById() instead.
+        "::destroyById::Group::logs": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Groups/:id/logs/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Group.logs.updateById() instead.
+        "::updateById::Group::logs": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Groups/:id/logs/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Group.logs() instead.
+        "::get::Group::logs": {
+          isArray: true,
+          url: urlBase + "/Groups/:id/logs",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Group.logs.create() instead.
+        "::create::Group::logs": {
+          url: urlBase + "/Groups/:id/logs",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Group.logs.createMany() instead.
+        "::createMany::Group::logs": {
+          isArray: true,
+          url: urlBase + "/Groups/:id/logs",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Group.logs.destroyAll() instead.
+        "::delete::Group::logs": {
+          url: urlBase + "/Groups/:id/logs",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Group.logs.count() instead.
+        "::count::Group::logs": {
+          url: urlBase + "/Groups/:id/logs/count",
+          method: "GET"
+        },
       }
     );
 
@@ -1604,6 +1669,42 @@ module.factory(
     R.modelName = "Log";
 
 
+        /**
+         * @ngdoc method
+         * @name lbServices.Log#group
+         * @methodOf lbServices.Log
+         *
+         * @description
+         *
+         * Fetches belongsTo relation group.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Group` object.)
+         * </em>
+         */
+        R.group = function() {
+          var TargetResource = $injector.get("Group");
+          var action = TargetResource["::get::Log::group"];
+          return action.apply(R, arguments);
+        };
+
     return R;
   }]);
 
@@ -1631,6 +1732,58 @@ module.factory(
       urlBase + "/Groups/:id",
       { 'id': '@id' },
       {
+
+        // INTERNAL. Use Group.logs.findById() instead.
+        "prototype$__findById__logs": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Groups/:id/logs/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Group.logs.destroyById() instead.
+        "prototype$__destroyById__logs": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Groups/:id/logs/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Group.logs.updateById() instead.
+        "prototype$__updateById__logs": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Groups/:id/logs/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Group.logs() instead.
+        "prototype$__get__logs": {
+          isArray: true,
+          url: urlBase + "/Groups/:id/logs",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Group.logs.create() instead.
+        "prototype$__create__logs": {
+          url: urlBase + "/Groups/:id/logs",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Group.logs.destroyAll() instead.
+        "prototype$__delete__logs": {
+          url: urlBase + "/Groups/:id/logs",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Group.logs.count() instead.
+        "prototype$__count__logs": {
+          url: urlBase + "/Groups/:id/logs/count",
+          method: "GET"
+        },
 
         /**
          * @ngdoc method
@@ -2014,6 +2167,12 @@ module.factory(
           url: urlBase + "/Groups/:id",
           method: "PUT"
         },
+
+        // INTERNAL. Use Log.group() instead.
+        "::get::Log::group": {
+          url: urlBase + "/Logs/:id/group",
+          method: "GET"
+        },
       }
     );
 
@@ -2150,6 +2309,307 @@ module.factory(
     */
     R.modelName = "Group";
 
+    /**
+     * @ngdoc object
+     * @name lbServices.Group.logs
+     * @header lbServices.Group.logs
+     * @object
+     * @description
+     *
+     * The object `Group.logs` groups methods
+     * manipulating `Log` instances related to `Group`.
+     *
+     * Call {@link lbServices.Group#logs Group.logs()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Group#logs
+         * @methodOf lbServices.Group
+         *
+         * @description
+         *
+         * Queries logs of Group.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Log` object.)
+         * </em>
+         */
+        R.logs = function() {
+          var TargetResource = $injector.get("Log");
+          var action = TargetResource["::get::Group::logs"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Group.logs#count
+         * @methodOf lbServices.Group.logs
+         *
+         * @description
+         *
+         * Counts logs of Group.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.logs.count = function() {
+          var TargetResource = $injector.get("Log");
+          var action = TargetResource["::count::Group::logs"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Group.logs#create
+         * @methodOf lbServices.Group.logs
+         *
+         * @description
+         *
+         * Creates a new instance in logs of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Log` object.)
+         * </em>
+         */
+        R.logs.create = function() {
+          var TargetResource = $injector.get("Log");
+          var action = TargetResource["::create::Group::logs"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Group.logs#createMany
+         * @methodOf lbServices.Group.logs
+         *
+         * @description
+         *
+         * Creates a new instance in logs of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Log` object.)
+         * </em>
+         */
+        R.logs.createMany = function() {
+          var TargetResource = $injector.get("Log");
+          var action = TargetResource["::createMany::Group::logs"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Group.logs#destroyAll
+         * @methodOf lbServices.Group.logs
+         *
+         * @description
+         *
+         * Deletes all logs of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.logs.destroyAll = function() {
+          var TargetResource = $injector.get("Log");
+          var action = TargetResource["::delete::Group::logs"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Group.logs#destroyById
+         * @methodOf lbServices.Group.logs
+         *
+         * @description
+         *
+         * Delete a related item by id for logs.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for logs
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.logs.destroyById = function() {
+          var TargetResource = $injector.get("Log");
+          var action = TargetResource["::destroyById::Group::logs"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Group.logs#findById
+         * @methodOf lbServices.Group.logs
+         *
+         * @description
+         *
+         * Find a related item by id for logs.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for logs
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Log` object.)
+         * </em>
+         */
+        R.logs.findById = function() {
+          var TargetResource = $injector.get("Log");
+          var action = TargetResource["::findById::Group::logs"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Group.logs#updateById
+         * @methodOf lbServices.Group.logs
+         *
+         * @description
+         *
+         * Update a related item by id for logs.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for logs
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Log` object.)
+         * </em>
+         */
+        R.logs.updateById = function() {
+          var TargetResource = $injector.get("Log");
+          var action = TargetResource["::updateById::Group::logs"];
+          return action.apply(R, arguments);
+        };
 
     return R;
   }]);

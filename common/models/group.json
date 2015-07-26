@@ -3,6 +3,9 @@
   "base": "PersistedModel",
   "idInjection": true,
   "properties": {
+    "name":{
+      "type": "string"
+    },
     "description": {
       "type": "string"
     }
@@ -12,11 +15,6 @@
     "logs": {
       "type": "hasMany",
       "model": "Log",
-      "foreignKey": ""
-    },
-    "user": {
-      "type": "belongsTo",
-      "model": "User",
       "foreignKey": ""
     }
   },

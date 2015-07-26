@@ -22,12 +22,7 @@
     "group": {
       "type": "belongsTo",
       "model": "Group",
-      "foreignKey": ""
-    },
-    "user": {
-      "type": "belongsTo",
-      "model": "User",
-      "foreignKey": ""
+      "foreignKey": "groupId"
     }
   },
   "acls": [],
