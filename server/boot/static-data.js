@@ -45,9 +45,16 @@ module.exports = function(app) {
       var Log = app.models.Log;
       Log.create([
         {
+          "date": "2015-07-26T04:12:21.392Z",
+          "unit": "time(s)",
+          "value": 1,
+          "groupId": "55b45e253d0f62383e8af029"
+        },
+        {
           "date": new Date(),
           "unit": "time(s)",
-          "value": 2
+          "value": 2,
+          "groupId": "55b45e253d0f62383e8af029"
         }
       ], cb);
     });
@@ -59,6 +66,7 @@ module.exports = function(app) {
       var Group = app.models.Group;
       Group.create([
         {
+          "id": "55b45e253d0f62383e8af029",
           "name": "exercise",
           "description": "Daily exercise in minutes"
         }

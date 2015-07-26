@@ -23,17 +23,33 @@ angular.module('dashKo', ['ngResource', 'lbServices', 'ui.router'])
 
   .factory('lbAPI', ['Log', 'Group', function (Log, Group) {
     var getLogs = function () {
-      console.log('calling and returning promise..', Log)
+      console.log('calling and returning promise..')
       return Log.find().$promise;
     };
+
+    var getGroups = function () {
+      console.log('calling and returning promise..')
+      return Group.find().$promise;
+    };
+
     return {
+      getGroups : getGroups,
       getLogs: getLogs
+
     }
   }])
 
 .controller('appCtrl', ['$scope', 'lbAPI', function($scope, lbAPI){
-    console.log('in ctrl')
     lbAPI.getLogs().then(function(suc){
       console.log('GOT LOGS', suc)
+    });
+
+    //should prob make group model
+    //
+
+    lbAPI.getGroups().then(function(suc){
+      console.log('GOT GROUPS', suc)
     })
+
+
   }]);
