@@ -33,11 +33,13 @@ angular.module('dashKo', ['ngResource', 'lbServices', 'ui.router'])
 
     var createGroupLog = function (param) {
       return Group.logs.create({
-        groupId: param.id,
+        //first obj gets passed as param.
+        id: param.id
+      }, {
+        //second obj gets passed as payload
         date: new Date(),
         unit: param.unit,
-        value: param.value
-      }).$promise;
+        value: param.value}).$promise;
     };
 
     return {
@@ -70,7 +72,7 @@ angular.module('dashKo', ['ngResource', 'lbServices', 'ui.router'])
         unit: group.unit,
         value: value
       }).then(function(){
-        
+
       })
     }
 
