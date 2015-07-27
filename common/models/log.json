@@ -14,7 +14,9 @@
     "value": {
       "type": "number",
       "required": true
-    }
+    },
+    "comment": {
+      "type": "string"
   },
   "validations": [],
   "relations": {

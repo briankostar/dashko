@@ -296,7 +296,7 @@ desired effect
 
       <div style="border: solid 1px black">
         <div ng-repeat="group in groups" style="border: dashed 1px black; padding: 5px;">
-          <strong>{{group.name}}</strong>
+          <strong><a ng-click="getGroupLogs(group.id)">{{group.name}}</a></strong>
           <br>
           {{group.description}}
           <br>

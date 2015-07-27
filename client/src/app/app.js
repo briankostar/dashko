@@ -30,6 +30,9 @@ angular.module('dashKo', ['ngResource', 'lbServices', 'ui.router'])
       return Group.find().$promise;
     };
 
+    var getGroupLog = function(param){
+      return Group.logs({}, {id: param.groupId}).$promise;
+    }
 
     var createGroupLog = function (param) {
       return Group.logs.create({
@@ -45,6 +48,7 @@ angular.module('dashKo', ['ngResource', 'lbServices', 'ui.router'])
     return {
       getGroups: getGroups,
       getLogs: getLogs,
+      getGroupLog : getGroupLog,
       createGroupLog: createGroupLog
     }
   }])
@@ -71,8 +75,15 @@ angular.module('dashKo', ['ngResource', 'lbServices', 'ui.router'])
         id: group.id,
         unit: group.unit,
         value: value
-      }).then(function(){
+      }).then(function(suc){
+        console.log('created log for group', suc)
+      })
+    }
 
+    $scope.getGroupLogs = function(groupId){
+      lbAPI.getGroupLog({groupId : groupId})
+        .then(function(suc){
+        console.log('got log for group', suc)
       })
     }
 
