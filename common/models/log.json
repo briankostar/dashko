@@ -9,8 +9,7 @@
       "required": true
     },
     "unit": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "value": {
       "type": "number",

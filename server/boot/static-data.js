@@ -46,13 +46,11 @@ module.exports = function(app) {
       Log.create([
         {
           "date": "2015-07-26T04:12:21.392Z",
-          "unit": "time(s)",
           "value": 1,
           "groupId": "55b45e253d0f62383e8af029"
         },
         {
           "date": new Date(),
-          "unit": "time(s)",
           "value": 2,
           "groupId": "55b45e253d0f62383e8af029"
         }
@@ -68,11 +66,14 @@ module.exports = function(app) {
         {
           "id": "55b45e253d0f62383e8af029",
           "name": "exercise",
-          "description": "Daily exercise in minutes"
+          "description": "Daily exercise in minute",
+          //could potentially be model of its own
+          "unit": "minute"
         },
         {
           "name": "programming",
-          "description": "Programming amount in hours"
+          "description": "Programming amount in minute",
+          "unit": "minute"
         }
       ], cb);
     });
