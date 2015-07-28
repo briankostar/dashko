@@ -32,7 +32,15 @@ angular.module('dashKo', ['ngResource', 'lbServices', 'ui.router'])
 
     var getGroupLog = function(param){
       return Group.logs({}, {id: param.groupId}).$promise;
-    }
+    };
+
+    var createGroup = function(param){
+      return Group.create({
+        name: param.name,
+        description: param.description,
+        unit: param.unit
+      })
+    };
 
     var createGroupLog = function (param) {
       return Group.logs.create({
@@ -49,6 +57,7 @@ angular.module('dashKo', ['ngResource', 'lbServices', 'ui.router'])
       getGroups: getGroups,
       getLogs: getLogs,
       getGroupLog : getGroupLog,
+      createGroup: createGroup,
       createGroupLog: createGroupLog
     }
   }])
