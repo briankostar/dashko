@@ -1,7 +1,7 @@
 angular.module('dashKo', ['ngResource', 'lbServices', 'ui.router'])
 
   .config(['LoopBackResourceProvider', '$stateProvider', '$urlRouterProvider', function (LoopBackResourceProvider, $stateProvider, $urlRouterProvider) {
-    LoopBackResourceProvider.setUrlBase('http://localhost:3000/api');
+    LoopBackResourceProvider.setUrlBase('http://dashko.herokuapp.com/api');
 
     $urlRouterProvider.otherwise("/");
     //
