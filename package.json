@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "main": "server/server.js",
   "scripts": {
-    "pretest": "jshint ."
+    "pretest": "jshint .",
+    "postinstall": "bower install"
   },
   "dependencies": {
     "async": "^1.4.0",
+    "bower": "^1.4.1",
     "compression": "^1.0.3",
     "errorhandler": "^1.1.1",
     "loopback": "^2.8.0",
