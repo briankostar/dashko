@@ -31,11 +31,11 @@ angular.module('dashKo', ['ngResource', 'lbServices', 'ui.router'])
       return Group.find().$promise;
     };
 
-    var getGroupLog = function(param){
+    var getGroupLog = function (param) {
       return Group.logs({}, {id: param.groupId}).$promise;
     };
 
-    var createGroup = function(param){
+    var createGroup = function (param) {
       return Group.create({
         name: param.name,
         description: param.description,
@@ -51,19 +51,20 @@ angular.module('dashKo', ['ngResource', 'lbServices', 'ui.router'])
         //second obj gets passed as payload
         date: new Date(),
         unit: param.unit,
-        value: param.value}).$promise;
+        value: param.value
+      }).$promise;
     };
 
     return {
       getGroups: getGroups,
       getLogs: getLogs,
-      getGroupLog : getGroupLog,
+      getGroupLog: getGroupLog,
       createGroup: createGroup,
       createGroupLog: createGroupLog
     }
   }])
 
-  .controller('AppCtrl', ['$scope', 'lbAPI', function ($scope, lbAPI) {
+  .controller('AppCtrl', ['$scope', 'lbAPI', function ($scope, lbAPI, Group) {
     //lbAPI.getLogs().then(function(suc){
     //  console.log('GOT LOGS', suc)
     //});
@@ -75,26 +76,65 @@ angular.module('dashKo', ['ngResource', 'lbServices', 'ui.router'])
 
     //when clicked, and w input, create a log -- need
 
-    lbAPI.getGroups().then(function (suc) {
-      console.log('Get groups', suc)
-      $scope.groups = suc;
-    })
+    $scope.CreateGroup = function () {
+      Group.create({
+        name: $scope.groupName,
+        description: $scope.groupDescription,
+        unit: $scope.groupUnit
+      }).$promise.then(function(suc){
+        console.log('made new group', suc)
+          $scope.getGroups();
+      })
+    };
+
+    $scope.getGroups = function(){
+      lbAPI.getGroups().then(function (suc) {
+        console.log('Get groups', suc)
+        $scope.groups = suc;
+      })
+    }
+
+    $scope.editGroup = function(id, groupName, groupDescription, groupUnit){
+      Group.prototype$updateAttributes({
+        id: id,
+        name: groupName,
+        description: groupDescription,
+        unit: groupUnit
+      }).$promise.then(function(suc){
+          console.log('edited group', suc)
+          $scope.getGroups();
+        })
+    }
+
+    $scope.deleteGroup = function(id){
+      Group.deleteById({
+        id: id
+      }).$promise.then(function(suc){
+          console.log('deleted group', suc)
+          $scope.getGroups();
+        })
+    }
+
+
 
     $scope.createGroupLog = function (group, value) {
       lbAPI.createGroupLog({
         id: group.id,
         unit: group.unit,
         value: value
-      }).then(function(suc){
+      }).then(function (suc) {
         console.log('created log for group', suc)
       })
     }
 
-    $scope.getGroupLogs = function(groupId){
-      lbAPI.getGroupLog({groupId : groupId})
-        .then(function(suc){
-        console.log('got log for group', suc)
-      })
+    $scope.getGroupLogs = function (groupId) {
+      lbAPI.getGroupLog({groupId: groupId})
+        .then(function (suc) {
+          console.log('got log for group', suc)
+        })
     }
+
+
+    $scope.getGroups();
 
   }]);

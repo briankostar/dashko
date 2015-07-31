@@ -294,6 +294,14 @@ desired effect
 
       GROUPS:
 
+      Create Group
+      <form>
+        <input ng-model="groupName" placeholder="groupName">
+        <input ng-model="groupDescription" placeholder="groupDescription">
+        <input ng-model="groupUnit" placeholder="groupUnit">
+        <button ng-click="CreateGroup">Create</button>
+      </form>
+
       <div style="border: solid 1px black">
         <div ng-repeat="group in groups" style="border: dashed 1px black; padding: 5px;">
           <strong><a ng-click="getGroupLogs(group.id)">{{group.name}}</a></strong>
