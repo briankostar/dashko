@@ -64,7 +64,7 @@ angular.module('dashKo', ['ngResource', 'lbServices', 'ui.router'])
     }
   }])
 
-  .controller('AppCtrl', ['$scope', 'lbAPI', function ($scope, lbAPI, Group) {
+  .controller('AppCtrl', ['$scope', 'lbAPI', 'Group', function ($scope, lbAPI, Group) {
     //lbAPI.getLogs().then(function(suc){
     //  console.log('GOT LOGS', suc)
     //});

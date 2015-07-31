@@ -299,18 +299,17 @@ desired effect
         <input ng-model="groupName" placeholder="groupName">
         <input ng-model="groupDescription" placeholder="groupDescription">
         <input ng-model="groupUnit" placeholder="groupUnit">
-        <button ng-click="CreateGroup">Create</button>
+        <button ng-click="CreateGroup()">Create</button>
       </form>
 
       <div style="border: solid 1px black">
         <div ng-repeat="group in groups" style="border: dashed 1px black; padding: 5px;">
-          <strong><a ng-click="getGroupLogs(group.id)">{{group.name}}</a></strong>
-          <br>
-          {{group.description}}
-          <br>
-
+          <strong><a ng-click="getGroupLogs(group.id)"><input ng-model="group.name"></a></strong>
+          <input ng-model="group.description">
           <button ng-click="editGroup(group.id, group.name, group.description, group.unit)">Update</button>
           <button ng-click="deleteGroup(group.id)">Delete</button>
+
+          <br>
           <form ng-submit="createGroupLog(group, value)">
             <input type="text" name="value" ng-model="value">
             {{group.unit}}s
