@@ -309,6 +309,8 @@ desired effect
           {{group.description}}
           <br>
 
+          <button ng-click="editGroup(group.id, group.name, group.description, group.unit)">Update</button>
+          <button ng-click="deleteGroup(group.id)">Delete</button>
           <form ng-submit="createGroupLog(group, value)">
             <input type="text" name="value" ng-model="value">
             {{group.unit}}s
