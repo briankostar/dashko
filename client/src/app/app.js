@@ -1,3 +1,10 @@
+//TODOs
+//restructure whole src for build and production
+//restructure routes
+//simpler design -- actually mock it out
+//get rid of current UI completely. incorporate material design.
+
+
 angular.module('dashKo', ['ngResource', 'lbServices', 'ui.router'])
 
   .config(['LoopBackResourceProvider', '$stateProvider', '$urlRouterProvider', function (LoopBackResourceProvider, $stateProvider, $urlRouterProvider) {

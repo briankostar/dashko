@@ -303,7 +303,7 @@ desired effect
       </form>
 
       <div style="border: solid 1px black">
-        <div ng-repeat="group in groups" style="border: dashed 1px black; padding: 5px;">
+        <div ng-repeat="group in groups" class="group" style="border: dashed 1px black; padding: 5px;">
           <strong><a ng-click="getGroupLogs(group.id)"><input ng-model="group.name"></a></strong>
           <input ng-model="group.description">
           <button ng-click="editGroup(group.id, group.name, group.description, group.unit)">Update</button>
