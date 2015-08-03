@@ -3,7 +3,7 @@
 //restructure routes
 //simpler design -- actually mock it out
 //get rid of current UI completely. incorporate material design.
-
+//change
 
 angular.module('dashKo', ['ngResource', 'lbServices', 'ui.router'])
 
