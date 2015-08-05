@@ -56,6 +56,7 @@
 
 'use strict';
 
+//gulp runs asyncronously. to run in seq., return stream, callback or promise
 var gulp = require('gulp');
 var wrench = require('wrench');
 

@@ -39,9 +39,13 @@ gulp.task('styles', function() {
   return gulp.src([
       path.join(conf.paths.src, '/app/index.scss')
     ])
+    //inject files into the scss files - inject:scss in html
     .pipe($.inject(injectFiles, injectOptions))
+    //wiredep bower components
     .pipe(wiredep(_.extend({}, conf.wiredep)))
+    //connect production to dev source map
     .pipe($.sourcemaps.init())
+    //compile sass
     .pipe($.sass(sassOptions)).on('error', conf.errorHandler('Sass'))
     .pipe($.autoprefixer()).on('error', conf.errorHandler('Autoprefixer'))
     .pipe($.sourcemaps.write())
