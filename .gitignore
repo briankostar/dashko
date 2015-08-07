@@ -20,3 +20,7 @@ npm-debug.log
 client/vendor
 
 server/datasources.json
+
+bower_components
+dist
+.tmp
