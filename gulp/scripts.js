@@ -1,5 +1,9 @@
 'use strict';
 
+//scripts that launches for build/dev and test.
+//now just triggers browser sync
+//with no preprocessor, just jshint. and run coffee/typescript/es6
+
 var path = require('path');
 var gulp = require('gulp');
 var conf = require('./conf');

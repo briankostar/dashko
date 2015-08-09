@@ -1,4 +1,5 @@
 'use strict';
+//optimizes and makes dist folder
 
 //require node path manipulation utilities
 var path = require('path');
@@ -11,6 +12,7 @@ var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
 
+//load all html from source, minify, apply ngCache, write to .tmp/partial for injection
 gulp.task('partials', function() {
   return gulp.src([
       //pass two files for streaming
@@ -32,7 +34,9 @@ gulp.task('partials', function() {
     .pipe(gulp.dest(conf.paths.tmp + '/partials/'));
 });
 
-
+//main process-- rewrites index.html.
+//concats & minify. 
+//use filters to apply transformation then rm filters with restore
 gulp.task('html', ['inject', 'partials'], function() {
   var partialsInjectFile = gulp.src(path.join(conf.paths.tmp,
     '/partials/templateCacheHtml.js'), {
@@ -51,7 +55,10 @@ gulp.task('html', ['inject', 'partials'], function() {
 
   return gulp.src(path.join(conf.paths.tmp, '/serve/*.html'))
     .pipe($.inject(partialsInjectFile, partialsInjectOptions))
+    //useref loads index.html at build:... comments
+    //apply transformation. concats, rewrite html.
     .pipe(assets = $.useref.assets())
+    //rename w hashe to avoid cache issue
     .pipe($.rev())
     .pipe(jsFilter)
     .pipe($.ngAnnotate())
@@ -80,8 +87,7 @@ gulp.task('html', ['inject', 'partials'], function() {
     }));
 });
 
-// Only applies for fonts from bower dependencies
-// Custom fonts are handled by the "other" task
+//for bower components that use fonts files. copies and put into dist/font
 gulp.task('fonts', function() {
   return gulp.src($.mainBowerFiles())
     .pipe($.filter('**/*.{eot,svg,ttf,woff,woff2}'))
@@ -89,6 +95,7 @@ gulp.task('fonts', function() {
     .pipe(gulp.dest(path.join(conf.paths.dist, '/fonts/')));
 });
 
+//for custom files in src. copies and put them in same path in dist
 gulp.task('other', function() {
   var fileFilter = $.filter(function(file) {
     return file.stat.isFile();

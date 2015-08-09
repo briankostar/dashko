@@ -1,5 +1,7 @@
 'use strict';
 
+//watch files and relaunch preprocessing & re inject
+
 var path = require('path');
 var gulp = require('gulp');
 var conf = require('./conf');
@@ -10,9 +12,13 @@ function isOnlyChange(event) {
   return event.type === 'changed';
 }
 
+//watches files separately
 gulp.task('watch', ['inject'], function () {
 
+  //src html files & bower.json is are watched and injected if changed
   gulp.watch([path.join(conf.paths.src, '/*.html'), 'bower.json'], ['inject']);
+
+  //watches css/js then injects
 
   gulp.watch([
     path.join(conf.paths.src, '/app/**/*.css'),
@@ -33,6 +39,7 @@ gulp.task('watch', ['inject'], function () {
     }
   });
 
+  //modification to html triggers bSync reload
   gulp.watch(path.join(conf.paths.src, '/app/**/*.html'), function(event) {
     browserSync.reload(event.path);
   });

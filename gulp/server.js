@@ -1,5 +1,7 @@
 'use strict';
 
+//launches dev server with bSync from .tmp/serve and src with priority on tmp
+
 var path = require('path');
 var gulp = require('gulp');
 var conf = require('./conf');
@@ -11,6 +13,7 @@ var util = require('util');
 
 var proxyMiddleware = require('http-proxy-middleware');
 
+//special route is added for bower_components
 function browserSyncInit(baseDir, browser) {
   browser = browser === undefined ? 'default' : browser;
 
@@ -22,6 +25,7 @@ function browserSyncInit(baseDir, browser) {
     };
   }
 
+//browser option is used to open defaul browser
   var server = {
     baseDir: baseDir,
     routes: routes
@@ -36,6 +40,8 @@ function browserSyncInit(baseDir, browser) {
    */
   // server.middleware = proxyMiddleware('/users', {target: 'http://jsonplaceholder.typicode.com', proxyHost: 'jsonplaceholder.typicode.com'});
 
+
+//can inject express middleware for proxy and redirect to another server
   browserSync.instance = browserSync.init({
     startPath: '/',
     server: server,

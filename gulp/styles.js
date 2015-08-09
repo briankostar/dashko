@@ -1,4 +1,7 @@
 'use strict';
+//launched for build/dev/test, watches change, run browser sync
+//only exist if using pre processor
+//inject src sass and bower dependencies to index.scss //bower, //injector
 
 var path = require('path');
 var gulp = require('gulp');
@@ -41,15 +44,19 @@ gulp.task('styles', function() {
     ])
     //inject files into the scss files - inject:scss in html
     .pipe($.inject(injectFiles, injectOptions))
-    //wiredep bower components
+    //wiredep inject bower components
     .pipe(wiredep(_.extend({}, conf.wiredep)))
-    //connect production to dev source map
+    //start src map. (connect production to dev source map)
     .pipe($.sourcemaps.init())
     //compile sass
     .pipe($.sass(sassOptions)).on('error', conf.errorHandler('Sass'))
+    //add webkit/mozilla prefixes
     .pipe($.autoprefixer()).on('error', conf.errorHandler('Autoprefixer'))
+    //end src map
     .pipe($.sourcemaps.write())
+    //write to .tmp/serv
     .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/app/')))
+    //reload wtih bSync
     .pipe(browserSync.reload({
       stream: true 
     }));
