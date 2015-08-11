@@ -67,7 +67,6 @@ var wrench = require('wrench');
 wrench.readdirSyncRecursive('./gulp').filter(function(file) {
   return (/\.(js|coffee)$/i).test(file);
 }).map(function(file) {
-  console.log(file);
   require('./gulp/' + file);
 });
 
