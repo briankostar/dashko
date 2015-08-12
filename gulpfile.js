@@ -76,6 +76,4 @@ require('./gulp/build.js');
  *  Default task clean temporaries directories and launch the
  *  main optimization build task
  */
-gulp.task('default', function() {
-  gulp.start('build');
-});
+gulp.task('default', ['build', 'lb']);
