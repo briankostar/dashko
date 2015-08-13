@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('gulpAngular')
+    .module('dashKo')
     .directive('acmeMalarkey', acmeMalarkey);
 
   /** @ngInject */
@@ -42,7 +42,7 @@
         });
       });
 
-      scope.$on('$destroy', function () {
+      scope.$on('$destroy', function() {
         watcher();
       });
     }

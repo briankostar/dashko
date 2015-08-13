@@ -7,5 +7,5 @@ gulp.task('lb', function() {
   return gulp.src('./server/server.js')
     .pipe(loopbackAngular())
     .pipe(rename('lb-services.js'))
-    .pipe(gulp.dest('./client/src/common'));
+    .pipe(gulp.dest('./src/app/components/lb'));
 });

@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('gulpAngular')
+    .module('dashKo')
     .factory('githubContributor', githubContributor);
 
   /** @ngInject */
@@ -30,7 +30,8 @@
       }
 
       function getContributorsFailed(error) {
-        $log.error('XHR Failed for getContributors.\n' + angular.toJson(error.data, true));
+        $log.error('XHR Failed for getContributors.\n' + angular.toJson(error
+          .data, true));
       }
     }
   }
