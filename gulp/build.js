@@ -12,6 +12,17 @@ var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
 
+// var rename = require('gulp-rename');
+// var loopbackAngular = require('gulp-loopback-sdk-angular');
+
+gulp.task('lb', function() {
+  return gulp.src('./server/server.js')
+    .pipe($.loopbackSdkAngular())
+    .pipe($.rename('lb-services.js'))
+    .pipe(gulp.dest('./src/app/components/lb'));
+});
+
+
 //load all html from source, minify, apply ngCache, write to .tmp/partial for injection
 gulp.task('partials', function() {
   return gulp.src([
@@ -35,9 +46,9 @@ gulp.task('partials', function() {
 });
 
 //main process-- rewrites index.html.
-//concats & minify. 
+//concats & minify.
 //use filters to apply transformation then rm filters with restore
-gulp.task('html', ['inject', 'partials'], function() {
+gulp.task('html', ['lb', 'inject', 'partials'], function() {
   var partialsInjectFile = gulp.src(path.join(conf.paths.tmp,
     '/partials/templateCacheHtml.js'), {
     read: false
