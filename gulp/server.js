@@ -15,21 +15,26 @@ var proxyMiddleware = require('http-proxy-middleware');
 
 //special route is added for bower_components
 function browserSyncInit(baseDir, browser) {
+  console.log('baseDir', baseDir)
+  console.log('browser', browser) //undefined here
   browser = browser === undefined ? 'default' : browser;
-
+  console.log('browser', browser) //becomes default
   var routes = null;
   if (baseDir === conf.paths.src || (util.isArray(baseDir) && baseDir.indexOf(
       conf.paths.src) !== -1)) {
     routes = {
-      '/vendor': '/vendor'
+      // '/bower_components': 'bower_components'
+      'client/vendor': 'client/vendor'
     };
   }
 
-//browser option is used to open defaul browser
+  //browser option is used to open defaul browser
   var server = {
     baseDir: baseDir,
     routes: routes
   };
+
+  console.log('server', server)
 
   /*
    * You can add a proxy to your backend by uncommenting the line bellow.
@@ -41,10 +46,21 @@ function browserSyncInit(baseDir, browser) {
   // server.middleware = proxyMiddleware('/users', {target: 'http://jsonplaceholder.typicode.com', proxyHost: 'jsonplaceholder.typicode.com'});
 
 
-//can inject express middleware for proxy and redirect to another server
+  //can inject express middleware for proxy and redirect to another server
   browserSync.instance = browserSync.init({
     startPath: '/',
-    server: server,
+    server: {
+      //serves files in src, but in url its :3000/
+      // baseDir: 'client'
+      //serve static files in these folders, but their contents are after :3000/
+      baseDir: ['.tmp/serve', 'src'],
+      //display
+      directory: true,
+      routes: {
+        //url to match : folder to serve
+        '/client/vendor': '/vendor'
+      }
+    },
     browser: browser
   });
 }
@@ -54,7 +70,9 @@ browserSync.use(browserSyncSpa({
 }));
 
 gulp.task('serve', ['watch'], function() {
-  browserSyncInit([path.join(conf.paths.tmp, '/serve'), conf.paths.src]);
+  browserSyncInit([path.join(conf.paths.tmp, '/serve'), 'src',
+    'client/vendor/angular'
+  ]);
 });
 
 gulp.task('serve:dist', ['build'], function() {

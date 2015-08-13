@@ -10,6 +10,7 @@ exports.paths = {
 
 //wiredep inject bower dependencies to index.html and more
 exports.wiredep = {
+  // directory: 'bower_components'
   directory: 'client/vendor'
 };
 
