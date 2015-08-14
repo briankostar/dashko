@@ -8,4 +8,6 @@
     .constant('toastr', toastr)
     .constant('moment', moment);
 
+  console.log('constant malarkey', malarkey)
+
 })();
