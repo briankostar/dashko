@@ -38,7 +38,7 @@ gulp.task('partials', function() {
     }))
     //turn to angular templatecache, setting the module name and root
     .pipe($.angularTemplatecache('templateCacheHtml.js', {
-      module: 'gulpAngular',
+      module: 'dashKo',
       root: 'app'
     }))
     //put into tmp folder
