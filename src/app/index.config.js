@@ -16,7 +16,7 @@
     toastr.options.preventDuplicates = true;
     toastr.options.progressBar = true;
 
-    LoopBackResourceProvider.setUrlBase('http://localhost:3000/api');
+    LoopBackResourceProvider.setUrlBase('http://localhost:9000/api');
     // LoopBackResourceProvider.setUrlBase('http://dashko.herokuapp.com/api');
   }
 
