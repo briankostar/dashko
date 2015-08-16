@@ -6,12 +6,12 @@
     .controller('HomeController', HomeController);
 
   /** @ngInject */
-  function HomeController(Group) {
+  function HomeController($scope, Group) {
     console.log('home ctrl activate!')
 
     Group.find().$promise.then(function(suc) {
       console.log('got groups', suc)
-      this.group = suc;
+      $scope.group = suc;
     });
 
   }
