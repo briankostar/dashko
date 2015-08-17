@@ -35,3 +35,44 @@
 Clean Slate
 group:
 {{group}}
+
+<section>
+
+  <!--<ui-view></ui-view>-->
+  get groups, display in box
+  when group clicked, display logs for that group in chart
+  input logs in group
+
+  GROUPS:
+
+  Create Group
+  <form>
+    <input ng-model="groupName" placeholder="groupName">
+    <input ng-model="groupDescription" placeholder="groupDescription">
+    <input ng-model="groupUnit" placeholder="groupUnit">
+    <button ng-click="CreateGroup()">Create</button>
+  </form>
+
+  <div style="border: solid 1px black">
+    <div ng-repeat="group in groups" class="group" style="border: dashed 1px black; padding: 5px;">
+      <strong><a ng-click="getGroupLogs(group.id)"><input ng-model="group.name"></a></strong>
+      <input ng-model="group.description">
+      <button ng-click="editGroup(group.id, group.name, group.description, group.unit)">Update</button>
+      <button ng-click="deleteGroup(group.id)">Delete</button>
+
+      <br>
+      <form ng-submit="createGroupLog(group, value)">
+        <input type="text" name="value" ng-model="value">
+        {{group.unit}}s
+        <br>
+        <button >Log it!</button>
+      </form>
+    </div>
+  </div>
+
+
+  <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+  <!-- Your Page Content Here -->
+
+</section>
