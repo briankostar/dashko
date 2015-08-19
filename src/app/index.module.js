@@ -3,7 +3,7 @@
 
   angular
     .module('dashKo', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize',
-      'ngResource', 'ui.router', 'ngMaterial', 'lbServices'
+      'ngResource', 'ui.router', 'ngMaterial', 'lbServices', 'ngMdIcons'
     ]);
 
 })();
