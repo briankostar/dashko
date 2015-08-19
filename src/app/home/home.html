@@ -32,14 +32,21 @@
 <!--</md-content>-->
 
 <!--</div>-->
-Clean Slate group:
-
 <md-content layout-padding>
 
   <!--<ui-view></ui-view>-->
 
-  <form>
+  <!-- <form> -->
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <md-button class="md-icon-button">
+          <md-icon></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
     <md-content layout-padding>
+
+      <div layout="column">
       <md-input-container>
         <label>GroupName</label>
         <input ng-model="groupName" placeholder="groupName">
@@ -52,9 +59,12 @@ Clean Slate group:
         <label>unit</label>
         <input ng-model="groupUnit" placeholder="groupUnit">
       </md-input-container>
-          <button ng-click="CreateGroup()">Create</button>
+
+
+          <md-button class="md-raised md-primary" aria-label="create group" ng-click="CreateGroup()">Create</md-button>
+    </div>
     </md-content>
-  </form>
+  <!-- </form> -->
 
   <div style="border: solid 1px black">
     <div ng-repeat="group in groups" class="group" style="border: dashed 1px black; padding: 5px;">
