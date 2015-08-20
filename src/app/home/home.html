@@ -37,24 +37,24 @@
   <!--<ui-view></ui-view>-->
 
   <!-- <form> -->
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <md-button class="md-icon-button">
-          <!-- <md-icon></md-icon> -->
-          <ng-md-icon icon="reorder" style="fill:white" size="45"></ng-md-icon>
-        </md-button>
-        <h2><span>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button">
+        <!-- <md-icon></md-icon> -->
+        <ng-md-icon icon="reorder" style="fill:white" size="45"></ng-md-icon>
+      </md-button>
+      <h2><span>
           dashKo -- Track your KPI!
         </span></h2>
-        <span flex></span>
-        <md-button class="md-icon-button" aria-label="More">
-          <ng-md-icon icon="settings" style="fill:white" size="45"></ng-md-icon>
-        </md-button>
-      </div>
-    </md-toolbar>
+      <span flex></span>
+      <md-button class="md-icon-button" aria-label="More">
+        <ng-md-icon icon="settings" style="fill:white" size="45"></ng-md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
 
-    <md-content layout-padding>
-      <div layout="column">
+  <md-content layout-padding>
+    <div layout="column">
       <md-input-container>
         <label>GroupName</label>
         <input ng-model="groupName" placeholder="groupName">
@@ -67,12 +67,57 @@
         <label>unit</label>
         <input ng-model="groupUnit" placeholder="groupUnit">
       </md-input-container>
-
-
-          <md-button class="md-raised md-primary" aria-label="create group" ng-click="CreateGroup()">Create</md-button>
+      <md-button class="md-raised md-primary" aria-label="create group" ng-click="CreateGroup()">Create</md-button>
     </div>
-    </md-content>
+  </md-content>
   <!-- </form> -->
+
+  <md-grid-list md-cols="5" md-gutter="1em" md-row-height="4:3">
+    <md-grid-tile>
+      <md-grid-tile-header>
+        <h3>Header</h3>
+      </md-grid-tile-header>
+      no header content
+      <br>
+      asdfasdf sad sdfasdf sdfsdfsdassadf sdf asd fas df sd ds
+      <md-grid-tile-footer>
+        <h4>Footer</h4>
+      </md-grid-tile-footer>
+    </md-grid-tile>
+    <md-grid-tile>
+      <md-grid-tile-header>
+        <h3>Header</h3>
+      </md-grid-tile-header>
+    </md-grid-tile>
+    <md-grid-tile>
+      <md-grid-tile-header>
+        <h3>Header</h3>
+      </md-grid-tile-header>
+    </md-grid-tile>
+    <md-grid-tile>
+      <md-grid-tile-header>
+        <h3>Header</h3>
+      </md-grid-tile-header>
+    </md-grid-tile>
+  </md-grid-list>
+
+<md-content layout-padding>
+  <div layout="row" layout-margin>
+    <div ng-repeat="group in groups" class="group">
+      <strong><a ng-click="getGroupLogs(group.id)"><input ng-model="group.name"></a></strong>
+      <input ng-model="group.description">
+      <button ng-click="editGroup(group.id, group.name, group.description, group.unit)">Update</button>
+      <button ng-click="deleteGroup(group.id)">Delete</button>
+
+      <br>
+      <form ng-submit="createGroupLog(group, value)">
+        <input type="text" name="value" ng-model="value"> {{group.unit}}s
+        <br>
+        <button>Log it!</button>
+      </form>
+    </div>
+  </div>
+</md-content>
 
   <div style="border: solid 1px black">
     <div ng-repeat="group in groups" class="group" style="border: dashed 1px black; padding: 5px;">
