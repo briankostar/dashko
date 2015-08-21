@@ -6,10 +6,10 @@
     .controller('HomeController', HomeController);
 
   /** @ngInject */
-  function HomeController($scope, Group) {
+  function HomeController($scope, $mdDialog, Group) {
 
     Group.find().$promise.then(function(suc) {
-      console.log('got groups', suc)
+      console.log('got groups', suc);
       $scope.groups = suc;
     });
 
@@ -18,7 +18,8 @@
         id: id
       }).$promise.then(function(suc) {
         console.log('got log for group', suc);
-        drawChart(suc);
+        // $scope.showGraph(ev);
+        // drawChart(suc);
       });
     };
 
@@ -42,8 +43,57 @@
           data: data
         }]
       });
-    }
+    };
+
+    //bind dialog to document.body
+    $scope.showLogEdit = function(ev, id) {
+
+      $scope.getGroupLogs(id)
+
+      $mdDialog.show({
+          // controller: DialogController, //how to seperate this out
+          templateUrl: 'app/dialog/dialog1.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose: true
+        })
+        .then(function(answer) {
+          $scope.status = 'You said...' + answer;
+        }, function() {
+          $scope.status = 'You cancelled!';
+        });
+    };
+
+    $scope.showGraph = function(ev) {
+      $mdDialog.show({
+          // controller: DialogController, //how to seperate this out
+          templateUrl: 'app/dialog/graph.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose: true
+        })
+        .then(function(answer) {
+          $scope.status = 'You said...' + answer;
+        }, function() {
+          $scope.status = 'You cancelled!';
+        });
+    };
 
 
   }
+
+  function DialogController($scope, $mdDialog) {
+    $scope.hide = function() {
+      $mdDialog.hide();
+    };
+
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
+
+    $scope.answer = function(answer) {
+      $mdDialog.hide(answer);
+    };
+  }
+
 })();
