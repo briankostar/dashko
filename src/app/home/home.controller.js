@@ -19,7 +19,7 @@
       }).$promise.then(function(suc) {
         console.log('got log for group', suc);
         // $scope.showGraph(ev);
-        // drawChart(suc);
+        drawChart(suc);
       });
     };
 
@@ -35,7 +35,7 @@
       console.log('data to draw', data);
 
 
-      $('#container').highcharts({
+      $('#container2').highcharts({
         xAxis: {
           type: 'datetime'
         },
@@ -47,9 +47,6 @@
 
     //bind dialog to document.body
     $scope.showLogEdit = function(ev, id) {
-
-      $scope.getGroupLogs(id)
-
       $mdDialog.show({
           // controller: DialogController, //how to seperate this out
           templateUrl: 'app/dialog/dialog1.html',
@@ -64,19 +61,30 @@
         });
     };
 
-    $scope.showGraph = function(ev) {
+    $scope.showGraph = function(ev, id) {
+      console.log('id', id)
+        // $scope.getGroupLogs(id);
+
+
       $mdDialog.show({
           // controller: DialogController, //how to seperate this out
           templateUrl: 'app/dialog/graph.html',
           parent: angular.element(document.body),
           targetEvent: ev,
-          clickOutsideToClose: true
+          clickOutsideToClose: true,
+          resolve: {},
+          onComplete: function() {
+            console.log('dialog loaded')
+            $scope.getGroupLogs(id);
+          }
         })
         .then(function(answer) {
           $scope.status = 'You said...' + answer;
         }, function() {
           $scope.status = 'You cancelled!';
         });
+      //load dialog then draw graph..
+
     };
 
 

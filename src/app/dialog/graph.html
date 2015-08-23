@@ -1,1 +1,27 @@
-<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<md-dialog flex>
+  <form action="">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Group Name</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="answer('not applicable')" aria-label="answer">
+        <!-- <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon> -->
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content>
+    graph go here
+    <div id="container2" style="min-width: 100px; height: 200px; margin: 0 auto"></div>
+
+  </md-dialog-content>
+  <div class="md-actions" layout="row">
+    <span flex></span>
+    <md-button ng-click="answer('not useful')">
+     Not Useful
+    </md-button>
+    <md-button ng-click="answer('useful')" style="margin-right:20px;">
+      Useful
+    </md-button>
+  </div>
+  </form>
+</md-dialog>
