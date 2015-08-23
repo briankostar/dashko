@@ -3,7 +3,7 @@
 
   angular
     .module('dashKo')
-    .controller('HomeController', HomeController);
+    .controller('HomeController', HomeController)
 
   /** @ngInject */
   function HomeController($scope, $mdDialog, Group) {
@@ -35,7 +35,7 @@
       console.log('data to draw', data);
 
 
-      $('#container2').highcharts({
+      $('#dialog-graph').highcharts({
         xAxis: {
           type: 'datetime'
         },
@@ -46,10 +46,10 @@
     };
 
     //bind dialog to document.body
-    $scope.showLogEdit = function(ev, id) {
+    $scope.showLogEdit = function(ev) {
       $mdDialog.show({
           // controller: DialogController, //how to seperate this out
-          templateUrl: 'app/dialog/dialog1.html',
+          templateUrl: 'app/dialog/noteSetting.html',
           parent: angular.element(document.body),
           targetEvent: ev,
           clickOutsideToClose: true
@@ -62,10 +62,6 @@
     };
 
     $scope.showGraph = function(ev, id) {
-      console.log('id', id)
-        // $scope.getGroupLogs(id);
-
-
       $mdDialog.show({
           // controller: DialogController, //how to seperate this out
           templateUrl: 'app/dialog/graph.html',
@@ -90,18 +86,5 @@
 
   }
 
-  function DialogController($scope, $mdDialog) {
-    $scope.hide = function() {
-      $mdDialog.hide();
-    };
-
-    $scope.cancel = function() {
-      $mdDialog.cancel();
-    };
-
-    $scope.answer = function(answer) {
-      $mdDialog.hide(answer);
-    };
-  }
 
 })();
