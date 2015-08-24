@@ -8,6 +8,14 @@
   /** @ngInject */
   function HomeController($scope, $mdDialog, Group) {
 
+    this.topDirections = ['left', 'up'];
+    this.bottomDirections = ['down', 'right'];
+    this.isOpen = false;
+    this.availableModes = ['md-fling', 'md-scale'];
+    this.selectedMode = 'md-fling';
+    this.availableDirections = ['up', 'down', 'left', 'right'];
+    this.selectedDirection = 'left';
+
     Group.find().$promise.then(function(suc) {
       console.log('got groups', suc);
       $scope.groups = suc;
@@ -44,6 +52,21 @@
         }]
       });
     };
+
+    $scope.showNoteCreate = function(ev) {
+      $mdDialog.show({
+          // controller: DialogController, //how to seperate this out
+          templateUrl: 'app/dialog/noteCreate.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose: true
+        })
+        .then(function(answer) {
+          $scope.status = 'You said...' + answer;
+        }, function() {
+          $scope.status = 'You cancelled!';
+        });
+    }
 
     //bind dialog to document.body
     $scope.showLogEdit = function(ev) {
