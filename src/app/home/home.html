@@ -93,7 +93,7 @@
     <div flex="33" flex-order ng-repeat="group in groups" class="group"  style="border: dashed 1px black; padding: 5px;">
       <strong ng-click="showGraph($event, group.id)">{{group.name}}</strong>
       <span flex></span>
-      <md-button class="md-icon-button" aria-label="More" ng-click="showLogEdit($event)" flex>
+      <md-button class="md-icon-button" aria-label="More" ng-click="showNoteEdit($event, group)" flex>
         <ng-md-icon icon="settings" style="fill:black" size="15"></ng-md-icon>
       </md-button>
         <br>

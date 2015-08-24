@@ -17,6 +17,10 @@
     $scope.answer = function(answer) {
       $mdDialog.hide(answer);
     };
+
+    $scope.okay = function() {
+      $mdDialog.hide();
+    };
   }
 
 })();

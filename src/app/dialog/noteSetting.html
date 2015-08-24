@@ -1,8 +1,8 @@
-<md-dialog aria-label="Group Name">
+<md-dialog aria-label="Group Name" flex="50">
   <form>
   <md-toolbar>
     <div class="md-toolbar-tools">
-      <h2>Group Name</h2>
+      <h2>Edit Group Name</h2>
       <span flex></span>
       <md-button class="md-icon-button" ng-click="answer('not applicable')" aria-label="answer">
         <!-- <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon> -->
@@ -11,17 +11,33 @@
     </div>
   </md-toolbar>
   <md-dialog-content>
-    <div>
-    Edit group name, description, unit
-    </div>
+    <md-content layout-padding>
+
+      group:{{group}}
+      <div layout="column">
+        <md-input-container>
+          <label>GroupName</label>
+          <input ng-model="group.name">
+        </md-input-container>
+        <md-input-container>
+          <label>Description</label>
+          <input ng-model="group.description">
+        </md-input-container>
+        <md-input-container>
+          <label>unit</label>
+          <input ng-model="group.unit">
+        </md-input-container>
+      </div>
+    </md-content>
+
   </md-dialog-content>
   <div class="md-actions" layout="row">
     <span flex></span>
     <md-button ng-click="Cancel('not useful')">
-     Not Useful
+     Cancel
     </md-button>
-    <md-button ng-click="Save('useful')" style="margin-right:20px;">
-      Useful
+    <md-button ng-click="saveNoteSetting(id, groupName, groupDescription, unit)" style="margin-right:20px;">
+      Save
     </md-button>
   </div>
   </form>

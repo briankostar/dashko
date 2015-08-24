@@ -31,6 +31,18 @@
       });
     };
 
+    $scope.editGroup = function(id, groupName, groupDescription, groupUnit) {
+      Group.prototype$updateAttributes({
+        id: id,
+        name: groupName,
+        description: groupDescription,
+        unit: groupUnit
+      }).$promise.then(function(suc) {
+        console.log('edited group', suc)
+          // $scope.getGroups();
+      });
+    };
+
     var drawChart = function(logs) {
 
       //get date min and max
@@ -69,16 +81,22 @@
     }
 
     //bind dialog to document.body
-    $scope.showLogEdit = function(ev) {
+    $scope.showNoteEdit = function(ev, group) {
+      console.log('group', group)
+      var group = '3'
       $mdDialog.show({
-          // controller: DialogController, //how to seperate this out
+          controller: DialogController, //how to seperate this out
           templateUrl: 'app/dialog/noteSetting.html',
           parent: angular.element(document.body),
           targetEvent: ev,
-          clickOutsideToClose: true
+          clickOutsideToClose: true,
+          locals: {
+            group: 'sdf'
+          }
         })
         .then(function(answer) {
           $scope.status = 'You said...' + answer;
+          console.log('ok ----')
         }, function() {
           $scope.status = 'You cancelled!';
         });
@@ -107,6 +125,24 @@
     };
 
 
+  }
+
+  function DialogController($scope, $mdDialog) {
+    $scope.hide = function() {
+      $mdDialog.hide();
+    };
+
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
+
+    $scope.answer = function(answer) {
+      $mdDialog.hide(answer);
+    };
+
+    $scope.okay = function() {
+      $mdDialog.hide();
+    };
   }
 
 
