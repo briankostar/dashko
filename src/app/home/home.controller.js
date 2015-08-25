@@ -1,9 +1,9 @@
-(function() {
+(function () {
   'use strict';
 
   angular
     .module('dashKo')
-    .controller('HomeController', HomeController)
+    .controller('HomeController', HomeController);
 
   /** @ngInject */
   function HomeController($scope, $mdDialog, Group) {
@@ -16,39 +16,39 @@
     this.availableDirections = ['up', 'down', 'left', 'right'];
     this.selectedDirection = 'left';
 
-    Group.find().$promise.then(function(suc) {
+    Group.find().$promise.then(function (suc) {
       console.log('got groups', suc);
       $scope.groups = suc;
     });
 
-    $scope.getGroupLogs = function(id) {
+    $scope.getGroupLogs = function (id) {
       Group.logs({}, {
         id: id
-      }).$promise.then(function(suc) {
+      }).$promise.then(function (suc) {
         console.log('got log for group', suc);
         // $scope.showGraph(ev);
         drawChart(suc);
       });
     };
 
-    $scope.editGroup = function(id, groupName, groupDescription, groupUnit) {
+    $scope.editGroup = function (id, groupName, groupDescription, groupUnit) {
       Group.prototype$updateAttributes({
         id: id,
         name: groupName,
         description: groupDescription,
         unit: groupUnit
-      }).$promise.then(function(suc) {
-        console.log('edited group', suc)
-          // $scope.getGroups();
+      }).$promise.then(function (suc) {
+        console.log('edited group', suc);
+        // $scope.getGroups();
       });
     };
 
-    var drawChart = function(logs) {
+    var drawChart = function (logs) {
 
       //get date min and max
       //get unit min max
 
-      var data = logs.map(function(log) {
+      var data = logs.map(function (log) {
         return [log.date, log.value];
       });
 
@@ -65,7 +65,7 @@
       });
     };
 
-    $scope.showNoteCreate = function(ev) {
+    $scope.showNoteCreate = function (ev) {
       $mdDialog.show({
           // controller: DialogController, //how to seperate this out
           templateUrl: 'app/dialog/noteCreate.html',
@@ -73,36 +73,39 @@
           targetEvent: ev,
           clickOutsideToClose: true
         })
-        .then(function(answer) {
+        .then(function (answer) {
           $scope.status = 'You said...' + answer;
-        }, function() {
-          $scope.status = 'You cancelled!';
-        });
-    }
-
-    //bind dialog to document.body
-    $scope.showNoteEdit = function(ev, group) {
-      console.log('group', group)
-      var group = '3'
-      $mdDialog.show({
-          controller: DialogController, //how to seperate this out
-          templateUrl: 'app/dialog/noteSetting.html',
-          parent: angular.element(document.body),
-          targetEvent: ev,
-          clickOutsideToClose: true,
-          locals: {
-            group: 'sdf'
-          }
-        })
-        .then(function(answer) {
-          $scope.status = 'You said...' + answer;
-          console.log('ok ----')
-        }, function() {
+        }, function () {
           $scope.status = 'You cancelled!';
         });
     };
 
-    $scope.showGraph = function(ev, id) {
+    //bind dialog to document.body
+    $scope.showNoteEdit = function (ev, group) {
+      // console.log('group', group);
+      // var test = '3';
+      $mdDialog.show({
+          controller: DialogController, //how to seperate this out
+          bindToController: true,
+          controllerAs: 'dialog',
+          templateUrl: 'app/dialog/noteSetting.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose: true,
+          //injects into the ctrl, not bind to its scope!
+          locals: {
+            group: group
+          }
+        })
+        // .then(function (answer) {
+        //   $scope.status = 'You said...' + answer;
+        //   console.log('ok ----');
+        // }, function () {
+        //   $scope.status = 'You cancelled!';
+        // });
+    };
+
+    $scope.showGraph = function (ev, id) {
       $mdDialog.show({
           // controller: DialogController, //how to seperate this out
           templateUrl: 'app/dialog/graph.html',
@@ -110,14 +113,14 @@
           targetEvent: ev,
           clickOutsideToClose: true,
           resolve: {},
-          onComplete: function() {
-            console.log('dialog loaded')
+          onComplete: function () {
+            console.log('dialog loaded');
             $scope.getGroupLogs(id);
           }
         })
-        .then(function(answer) {
+        .then(function (answer) {
           $scope.status = 'You said...' + answer;
-        }, function() {
+        }, function () {
           $scope.status = 'You cancelled!';
         });
       //load dialog then draw graph..
@@ -128,20 +131,23 @@
   }
 
   function DialogController($scope, $mdDialog) {
-    $scope.hide = function() {
+
+    //closes the modal and resolves the promise
+    $scope.hide = function () {
       $mdDialog.hide();
     };
 
-    $scope.cancel = function() {
+    //closes dialog and rejects promise
+    $scope.cancel = function () {
       $mdDialog.cancel();
     };
 
-    $scope.answer = function(answer) {
+    $scope.answer = function (answer) {
       $mdDialog.hide(answer);
     };
 
-    $scope.okay = function() {
-      $mdDialog.hide();
+    $scope.resolveDialog = function (answer) {
+      $mdDialog.hide(answer);
     };
   }
 

@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -6,19 +6,20 @@
     .controller('DialogController', DialogController);
 
   function DialogController($scope, $mdDialog) {
-    $scope.hide = function() {
+    $scope.test = 'from ctrl'
+    $scope.hide = function () {
       $mdDialog.hide();
     };
 
-    $scope.cancel = function() {
+    $scope.cancel = function () {
       $mdDialog.cancel();
     };
 
-    $scope.answer = function(answer) {
+    $scope.answer = function (answer) {
       $mdDialog.hide(answer);
     };
 
-    $scope.okay = function() {
+    $scope.okay = function () {
       $mdDialog.hide();
     };
   }

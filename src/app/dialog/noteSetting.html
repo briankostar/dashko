@@ -12,20 +12,18 @@
   </md-toolbar>
   <md-dialog-content>
     <md-content layout-padding>
-
-      group:{{group}}
       <div layout="column">
         <md-input-container>
           <label>GroupName</label>
-          <input ng-model="group.name">
+          <input ng-model="dialog.group.name">
         </md-input-container>
         <md-input-container>
           <label>Description</label>
-          <input ng-model="group.description">
+          <input ng-model="dialog.group.description">
         </md-input-container>
         <md-input-container>
           <label>unit</label>
-          <input ng-model="group.unit">
+          <input ng-model="dialog.group.unit">
         </md-input-container>
       </div>
     </md-content>
