@@ -16,10 +16,13 @@
     this.availableDirections = ['up', 'down', 'left', 'right'];
     this.selectedDirection = 'left';
 
-    Group.find().$promise.then(function (suc) {
-      console.log('got groups', suc);
-      $scope.groups = suc;
-    });
+    var getGroups = function () {
+      Group.find().$promise.then(function (suc) {
+        console.log('got groups', suc);
+        $scope.groups = suc;
+      });
+    }
+
 
     $scope.getGroupLogs = function (id) {
       Group.logs({}, {
@@ -31,15 +34,15 @@
       });
     };
 
-    $scope.editGroup = function (id, groupName, groupDescription, groupUnit) {
+    $scope.editGroup = function (group) {
       Group.prototype$updateAttributes({
-        id: id,
-        name: groupName,
-        description: groupDescription,
-        unit: groupUnit
+        id: group.id,
+        name: group.groupName,
+        description: group.groupDescription,
+        unit: group.groupUnit
       }).$promise.then(function (suc) {
         console.log('edited group', suc);
-        // $scope.getGroups();
+        getGroups();
       });
     };
 
@@ -97,12 +100,11 @@
             group: group
           }
         })
-        // .then(function (answer) {
-        //   $scope.status = 'You said...' + answer;
-        //   console.log('ok ----');
-        // }, function () {
-        //   $scope.status = 'You cancelled!';
-        // });
+        .then(function (group) {
+          $scope.editGroup(group);
+        }, function () {
+
+        });
     };
 
     $scope.showGraph = function (ev, id) {
@@ -127,6 +129,8 @@
 
     };
 
+    getGroups();
+
 
   }
 
@@ -148,6 +152,17 @@
 
     $scope.resolveDialog = function (answer) {
       $mdDialog.hide(answer);
+    };
+
+    $scope.editGroup = function (id, groupName, groupDescription, groupUnit) {
+      console.log('editGroup', id, groupName, groupDescription, groupUnit)
+      var group = {
+        id: id,
+        groupName: groupName,
+        groupDescription: groupDescription,
+        groupUnit: groupUnit
+      }
+      $mdDialog.hide(group);
     };
   }
 
