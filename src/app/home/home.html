@@ -90,14 +90,20 @@
 
 <md-content >
   <div layout="row" layout-margin>
-    <div flex="33" flex-order ng-repeat="group in groups" class="group"  style="border: dashed 1px black; padding: 5px;">
-      <strong ng-click="showGraph($event, group.id)">{{group.name}}</strong>
-      <span flex></span>
-      <md-button class="md-icon-button" aria-label="More" ng-click="showNoteEdit($event, group)" flex>
-        <ng-md-icon icon="settings" style="fill:black" size="15"></ng-md-icon>
-      </md-button>
+    <div flex="30" flex-order ng-repeat="group in groups" class="group"  style="border: dashed 1px black; padding: 5px;">
+
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <h3 ng-click="showGraph($event, group.id)">{{group.name}}</h3>
+          <span flex></span>
+          <md-button class="md-icon-button" aria-label="More" ng-click="showNoteEdit($event, group)">
+            <ng-md-icon icon="settings" style="fill:white" size="45"></ng-md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
+
         <br>
-      {{group.description}}
+       {{group.description}}
       <!-- <button ng-click="editGroup(group.id, group.name, group.description, group.unit)">Update</button>
       <button ng-click="deleteGroup(group.id)">Delete</button> -->
 
