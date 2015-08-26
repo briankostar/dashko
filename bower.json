@@ -22,7 +22,7 @@
     "angular-touch": "~1.4.0",
     "angular-sanitize": "~1.4.0",
     "angular-resource": "~1.4.3",
-    "angular-material": "~0.9.7",
+    "angular-material": "master",
     "jquery": "~2.1.4",
     "malarkey": "yuanqing/malarkey#~1.3.0",
     "toastr": "~2.1.1",
@@ -43,6 +43,7 @@
     "angular-material": "~0.10.0"
   },
   "resolutions": {
-    "angular": "~1.4.2"
+    "angular": "~1.4.2",
+    "angular-material": "master"
   }
 }
