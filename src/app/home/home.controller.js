@@ -21,8 +21,10 @@
         console.log('got groups', suc);
         $scope.groups = suc;
       });
-    }
+    };
 
+
+    $scope.myDate = new Date();
 
     $scope.getGroupLogs = function (id) {
       Group.logs({}, {
@@ -44,6 +46,20 @@
         console.log('edited group', suc);
         getGroups();
       });
+    };
+
+    $scope.createLog = function (id, value) {
+      Group.logs.create({
+        //first obj gets passed as param.
+        id: id
+      }, {
+        //second obj gets passed as payload
+        date: new Date(),
+        // unit: param.unit,
+        value: value
+      }).$promise.then(function (suc) {
+        console.log('created log', suc)
+      })
     };
 
     var drawChart = function (logs) {

@@ -1,4 +1,3 @@
-
 <!--</div>-->
 <md-content layout-padding>
 
@@ -58,7 +57,7 @@
     </div>
   </md-content> -->
   <!-- </form> -->
-<!--
+  <!--
   <md-grid-list md-cols="5" md-gutter="1em" md-row-height="4:3">
     <md-grid-tile>
       <md-grid-tile-header>
@@ -88,39 +87,37 @@
     </md-grid-tile>
   </md-grid-list> -->
 
-<md-content >
-  <div layout="row" layout-margin>
-    <div flex="30" flex-order ng-repeat="group in groups" class="group"  style="border: solid 1px black; padding: 5px;">
+  <md-content>
+    <div layout="column" layout-margin>
+      <div flex="30" flex-md="50" flex-sm="100" ng-repeat="group in groups" class="group" style="border: solid 1px black;">
 
-      <md-toolbar>
-        <div class="md-toolbar-tools">
-          <h3 ng-click="showGraph($event, group.id)">{{group.name}}</h3>
-          <span flex></span>
-          <md-button class="md-icon-button" aria-label="More" ng-click="showNoteEdit($event, group)">
-            <ng-md-icon icon="settings" style="fill:white" size="45"></ng-md-icon>
-          </md-button>
-        </div>
-      </md-toolbar>
+        <md-toolbar>
+          <div class="md-toolbar-tools">
+            <h3 ng-click="showGraph($event, group.id)">{{group.name}}</h3>
+            <span flex></span>
+            <md-button class="md-icon-button" aria-label="More" ng-click="showNoteEdit($event, group)">
+              <ng-md-icon icon="settings" style="fill:white" size="45"></ng-md-icon>
+            </md-button>
+          </div>
+        </md-toolbar>
+        <md-content layout-margin>
+          <br> {{group.description}}
+          <!-- <button ng-click="editGroup(group.id, group.name, group.description, group.unit)">Update</button>
+<button ng-click="deleteGroup(group.id)">Delete</button> -->
 
-        <br>
-       {{group.description}}
-      <!-- <button ng-click="editGroup(group.id, group.name, group.description, group.unit)">Update</button>
-      <button ng-click="deleteGroup(group.id)">Delete</button> -->
-
-      <form ng-submit="createGroupLog(group, value)">
-        <md-input-container>
-          <label>{{group.unit}}s</label>
-          <input ng-model="value">
-        </md-input-container>
-        <md-button class="md-raised md-primary" aria-label="create log">Log</md-button>
-      </form>
+            <md-input-container>
+              <label>{{group.unit}}s</label>
+              <input ng-model="group.value">
+            </md-input-container>
+            <md-button class="md-raised md-primary" aria-label="create log" ng-click="createLog(group.id, group.value)">Log</md-button>
+        </md-content>
+      </div>
     </div>
-  </div>
-</md-content>
+  </md-content>
 
 
 
-<!--
+  <!--
   <div style="border: solid 1px black">
     <div ng-repeat="group in groups" class="group" style="border: dashed 1px black; padding: 5px;">
       <strong><a ng-click="getGroupLogs(group.id)"><input ng-model="group.name"></a></strong>
@@ -141,8 +138,6 @@
   <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div> -->
 
   <!-- Your Page Content Here -->
-
+  datepicker:
+  <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
 </md-content>
-
-
-<time-date-picker ng-model="dateValue"></time-date-picker>
