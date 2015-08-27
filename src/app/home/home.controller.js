@@ -58,8 +58,8 @@
         // unit: param.unit,
         value: value
       }).$promise.then(function (suc) {
-        console.log('created log', suc)
-      })
+        console.log('created log', suc);
+      });
     };
 
     var drawChart = function (logs) {
@@ -68,17 +68,37 @@
       //get unit min max
 
       var data = logs.map(function (log) {
-        return [log.date, log.value];
+        return [Date.parse(log.date), log.value];
       });
 
       console.log('data to draw', data);
 
 
       $('#dialog-graph').highcharts({
+        // chart: {
+        //   type: 'spline'
+        // },
+        title: {
+          text: 'Your progress'
+        },
         xAxis: {
-          type: 'datetime'
+          type: 'datetime',
+          dateTimeLabelFortmats: {
+            month: '%e. %b',
+            year: '%b'
+          },
+          title: {
+            text: 'Date'
+          }
+        },
+        yAxis: {
+          title: {
+            text: 'Unit'
+          },
+          min: 0
         },
         series: [{
+          name: 'Name?',
           data: data
         }]
       });
