@@ -60,6 +60,15 @@
       });
     };
 
+    $scope.deleteGroup = function (id) {
+      Group.deleteById({
+        id: id
+      }).$promise.then(function (suc) {
+        console.log('deleted group', suc)
+        $scope.getGroups();
+      })
+    }
+
     $scope.createLog = function (id, value) {
       Group.logs.create({
         //first obj gets passed as param.
@@ -146,8 +155,9 @@
             group: group
           }
         })
-        .then(function (group) {
-          $scope.editGroup(group);
+        .then(function () {
+          // $scope.editGroup(group);
+          getGroups();
         }, function () {
 
         });
@@ -180,7 +190,7 @@
 
   }
 
-  function DialogController($scope, $mdDialog) {
+  function DialogController($scope, $mdDialog, Group) {
 
     //closes the modal and resolves the promise
     $scope.hide = function () {
@@ -210,15 +220,37 @@
     };
 
     $scope.editGroup = function (id, groupName, groupDescription, groupUnit) {
-      console.log('editGroup', id, groupName, groupDescription, groupUnit);
-      var group = {
+      Group.prototype$updateAttributes({
         id: id,
-        groupName: groupName,
-        groupDescription: groupDescription,
-        groupUnit: groupUnit
-      };
-      $mdDialog.hide(group);
+        name: groupName,
+        description: groupDescription,
+        unit: groupUnit
+      }).$promise.then(function (suc) {
+        console.log('edited group', suc);
+        // getGroups();
+        $mdDialog.hide();
+      });
+      // var group = {
+      //   id: id,
+      //   groupName: groupName,
+      //   groupDescription: groupDescription,
+      //   groupUnit: groupUnit
+      // };
+      // $mdDialog.hide(group);
     };
+
+    $scope.deleteGroup = function (id) {
+      Group.deleteById({
+        id: id
+      }).$promise.then(function (suc) {
+        console.log('deleted group', suc)
+          // getGroups();
+        $mdDialog.hide();
+      });
+      // $mdDialog.hide(id);
+    };
+
+
   }
 
 
