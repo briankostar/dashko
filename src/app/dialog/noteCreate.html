@@ -4,10 +4,9 @@
     <div class="md-toolbar-tools">
       <h2>Create Note</h2>
       <span flex></span>
-      <md-button class="md-icon-button" ng-click="answer('not applicable')" aria-label="answer">
-        <!-- <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon> -->
+      <md-button class="md-icon-button" ng-click="cancel()" aria-label="answer">
+        <ng-md-icon icon="close" style="fill:white" size="45"></ng-md-icon>
       </md-button>
-      Del
     </div>
   </md-toolbar>
   <md-dialog-content>
@@ -15,15 +14,15 @@
       <div layout="column">
         <md-input-container>
           <label>GroupName</label>
-          <input ng-model="groupName" placeholder="groupName">
+          <input ng-model="name">
         </md-input-container>
         <md-input-container>
           <label>Description</label>
-          <input ng-model="groupDescription" placeholder="groupDescription">
+          <input ng-model="description">
         </md-input-container>
         <md-input-container>
           <label>unit</label>
-          <input ng-model="groupUnit" placeholder="groupUnit">
+          <input ng-model="unit">
         </md-input-container>
 
       </div>
@@ -31,10 +30,10 @@
   </md-dialog-content>
   <div class="md-actions" layout="row">
     <span flex></span>
-    <md-button ng-click="Cancel('not useful')">
+    <md-button ng-click="cancel('not useful')">
      Cancel
     </md-button>
-    <md-button class="md-raised md-primary" aria-label="create group" ng-click="CreateGroup()">Create</md-button>
+    <md-button class="md-raised md-primary" aria-label="create group" ng-click="CreateGroup(name, description, unit)">Create</md-button>
   </div>
   </form>
 </md-dialog>

@@ -36,6 +36,18 @@
       });
     };
 
+    $scope.createGroup = function (group) {
+      Group.create({
+        name: group.name,
+        description: group.description,
+        unit: group.unit
+      }).$promise.then(function (suc) {
+        console.log('made new group', suc);
+        getGroups();
+      });
+    };
+
+
     $scope.editGroup = function (group) {
       Group.prototype$updateAttributes({
         id: group.id,
@@ -71,9 +83,6 @@
         return [Date.parse(log.date), log.value];
       });
 
-      console.log('data to draw', data);
-
-
       $('#dialog-graph').highcharts({
         // chart: {
         //   type: 'spline'
@@ -106,16 +115,17 @@
 
     $scope.showNoteCreate = function (ev) {
       $mdDialog.show({
-          // controller: DialogController, //how to seperate this out
+          controller: DialogController,
           templateUrl: 'app/dialog/noteCreate.html',
           parent: angular.element(document.body),
           targetEvent: ev,
           clickOutsideToClose: true
         })
-        .then(function (answer) {
-          $scope.status = 'You said...' + answer;
+        .then(function (group) {
+          //group from dialog is passed. pass to fcn in home ctrl
+          $scope.createGroup(group);
         }, function () {
-          $scope.status = 'You cancelled!';
+
         });
     };
 
@@ -124,7 +134,7 @@
       // console.log('group', group);
       // var test = '3';
       $mdDialog.show({
-          controller: DialogController, //how to seperate this out
+          controller: DialogController,
           bindToController: true,
           controllerAs: 'dialog',
           templateUrl: 'app/dialog/noteSetting.html',
@@ -145,7 +155,7 @@
 
     $scope.showGraph = function (ev, id) {
       $mdDialog.show({
-          // controller: DialogController, //how to seperate this out
+          controller: DialogController,
           templateUrl: 'app/dialog/graph.html',
           parent: angular.element(document.body),
           targetEvent: ev,
@@ -156,10 +166,10 @@
             $scope.getGroupLogs(id);
           }
         })
-        .then(function (answer) {
-          $scope.status = 'You said...' + answer;
+        .then(function (suc) {
+
         }, function () {
-          $scope.status = 'You cancelled!';
+
         });
       //load dialog then draw graph..
 
@@ -190,14 +200,23 @@
       $mdDialog.hide(answer);
     };
 
+    $scope.CreateGroup = function (name, description, unit) {
+      var group = {
+        name: name,
+        description: description,
+        unit: unit
+      };
+      $mdDialog.hide(group);
+    };
+
     $scope.editGroup = function (id, groupName, groupDescription, groupUnit) {
-      console.log('editGroup', id, groupName, groupDescription, groupUnit)
+      console.log('editGroup', id, groupName, groupDescription, groupUnit);
       var group = {
         id: id,
         groupName: groupName,
         groupDescription: groupDescription,
         groupUnit: groupUnit
-      }
+      };
       $mdDialog.hide(group);
     };
   }
