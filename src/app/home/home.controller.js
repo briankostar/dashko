@@ -122,7 +122,7 @@
           min: 0
         },
         series: [{
-          name: 'Name?',
+          name: 'Label',
           data: data
         }]
       });
