@@ -6,7 +6,7 @@
     .controller('HomeController', HomeController);
 
   /** @ngInject */
-  function HomeController($scope, $mdDialog, Group) {
+  function HomeController($scope, $mdDialog, $mdToast, Group) {
 
     this.topDirections = ['left', 'up'];
     this.bottomDirections = ['down', 'right'];
@@ -81,6 +81,7 @@
         comment: comment
       }).$promise.then(function (suc) {
         console.log('created log', suc);
+        $scope.showSimpleToast();
       });
     };
 
@@ -187,6 +188,27 @@
     };
 
     getGroups();
+
+
+    $scope.toastPosition = {
+      bottom: false,
+      top: true,
+      left: false,
+      right: true
+    };
+    $scope.closeToast = function () {
+      $mdToast.hide();
+    };
+
+    $scope.showSimpleToast = function () {
+      $mdToast.show(
+        $mdToast.simple()
+        .content('Simple Toast!')
+        // .position($scope.getToastPosition())
+        .position('top right')
+        .hideDelay(3000)
+      );
+    };
 
 
   }
