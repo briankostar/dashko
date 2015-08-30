@@ -201,13 +201,15 @@
     };
 
     $scope.showSimpleToast = function () {
-      $mdToast.show(
-        $mdToast.simple()
-        .content('Simple Toast!')
+      $mdToast.show({
+        controller: ToastCtrl,
+        // $mdToast.simple()
+        // .content('Simple Toast!')
+        templateUrl: 'app/toast/success.html',
         // .position($scope.getToastPosition())
-        .position('top right')
-        .hideDelay(3000)
-      );
+        hideDelay: 4000,
+        position: 'top right fit'
+      });
     };
 
 
@@ -266,8 +268,8 @@
       Group.deleteById({
         id: id
       }).$promise.then(function (suc) {
-        console.log('deleted group', suc)
-          // getGroups();
+        console.log('deleted group', suc);
+        // getGroups();
         $mdDialog.hide();
       });
       // $mdDialog.hide(id);
@@ -276,5 +278,10 @@
 
   }
 
+  function ToastCtrl($scope, $mdToast) {
+    $scope.closeToast = function () {
+      $mdToast.hide();
+    };
+  }
 
 })();
