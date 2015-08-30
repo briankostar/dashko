@@ -69,7 +69,7 @@
       })
     }
 
-    $scope.createLog = function (id, value) {
+    $scope.createLog = function (id, value, comment) {
       Group.logs.create({
         //first obj gets passed as param.
         id: id
@@ -77,7 +77,8 @@
         //second obj gets passed as payload
         date: new Date(),
         // unit: param.unit,
-        value: value
+        value: value,
+        comment: comment
       }).$promise.then(function (suc) {
         console.log('created log', suc);
       });

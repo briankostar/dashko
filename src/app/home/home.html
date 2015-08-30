@@ -109,7 +109,11 @@
               <label>{{group.unit}}s</label>
               <input ng-model="group.value">
             </md-input-container>
-            <md-button class="md-raised md-primary" aria-label="create log" ng-click="createLog(group.id, group.value)">Log</md-button>
+            <md-input-container>
+              <label>Comment</label>
+              <input ng-model="group.comment">
+            </md-input-container>
+            <md-button class="md-raised md-primary" aria-label="create log" ng-click="createLog(group.id, group.value, group.comment)">Log</md-button>
         </md-content>
       </div>
     </div>
