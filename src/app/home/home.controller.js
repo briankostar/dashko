@@ -8,14 +8,6 @@
   /** @ngInject */
   function HomeController($scope, $mdDialog, $mdToast, Group) {
 
-    this.topDirections = ['left', 'up'];
-    this.bottomDirections = ['down', 'right'];
-    this.isOpen = false;
-    this.availableModes = ['md-fling', 'md-scale'];
-    this.selectedMode = 'md-fling';
-    this.availableDirections = ['up', 'down', 'left', 'right'];
-    this.selectedDirection = 'left';
-
     var getGroups = function () {
       Group.find().$promise.then(function (suc) {
         console.log('got groups', suc);
