@@ -201,10 +201,7 @@
       console.log('showing toast');
       $mdToast.show({
         controller: ToastCtrl,
-        // $mdToast.simple()
-        // .content('Simple Toast!')
         templateUrl: 'app/toast/success.html',
-        // .position($scope.getToastPosition())
         hideDelay: 2000,
         position: 'top right'
       });
@@ -250,17 +247,8 @@
         unit: groupUnit
       }).$promise.then(function (suc) {
         console.log('edited group', suc);
-        // getGroups();
-        // $scope.showSimpleToast();
         $mdDialog.hide();
       });
-      // var group = {
-      //   id: id,
-      //   groupName: groupName,
-      //   groupDescription: groupDescription,
-      //   groupUnit: groupUnit
-      // };
-      // $mdDialog.hide(group);
     };
 
     $scope.deleteGroup = function (id) {
@@ -268,11 +256,8 @@
         id: id
       }).$promise.then(function (suc) {
         console.log('deleted group', suc);
-        // getGroups();
-        // $scope.showSimpleToast();
         $mdDialog.hide();
       });
-      // $mdDialog.hide(id);
     };
 
 
