@@ -49,28 +49,29 @@
     };
 
 
-    $scope.editGroup = function (group) {
-      Group.prototype$updateAttributes({
-        id: group.id,
-        name: group.groupName,
-        description: group.groupDescription,
-        unit: group.groupUnit
-      }).$promise.then(function (suc) {
-        console.log('edited group', suc);
-        getGroups();
-        $scope.showSimpleToast();
-      });
-    };
+    // $scope.editGroup = function (group) {
+    //   Group.prototype$updateAttributes({
+    //     id: group.id,
+    //     name: group.groupName,
+    //     description: group.groupDescription,
+    //     unit: group.groupUnit
+    //   }).$promise.then(function (suc) {
+    //     console.log('edited group', suc);
+    //     $scope.showSimpleToast();
+    //     getGroups();
+    //
+    //   });
+    // };
 
-    $scope.deleteGroup = function (id) {
-      Group.deleteById({
-        id: id
-      }).$promise.then(function (suc) {
-        console.log('deleted group', suc);
-        $scope.getGroups();
-        $scope.showSimpleToast();
-      })
-    }
+    // $scope.deleteGroup = function (id) {
+    //   Group.deleteById({
+    //     id: id
+    //   }).$promise.then(function (suc) {
+    //     console.log('deleted group', suc);
+    //     $scope.getGroups();
+    //     $scope.showSimpleToast();
+    //   })
+    // }
 
     $scope.createLog = function (id, value, comment) {
       Group.logs.create({
@@ -163,6 +164,7 @@
         .then(function () {
           // $scope.editGroup(group);
           getGroups();
+          $scope.showSimpleToast();
         }, function () {
 
         });
@@ -204,6 +206,7 @@
     };
 
     $scope.showSimpleToast = function () {
+      console.log('showing toast');
       $mdToast.show({
         controller: ToastCtrl,
         // $mdToast.simple()
@@ -211,7 +214,7 @@
         templateUrl: 'app/toast/success.html',
         // .position($scope.getToastPosition())
         hideDelay: 2000,
-        position: 'top right fit'
+        position: 'top right'
       });
     };
 
@@ -256,6 +259,7 @@
       }).$promise.then(function (suc) {
         console.log('edited group', suc);
         // getGroups();
+        // $scope.showSimpleToast();
         $mdDialog.hide();
       });
       // var group = {
@@ -273,6 +277,7 @@
       }).$promise.then(function (suc) {
         console.log('deleted group', suc);
         // getGroups();
+        // $scope.showSimpleToast();
         $mdDialog.hide();
       });
       // $mdDialog.hide(id);
