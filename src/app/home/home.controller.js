@@ -44,6 +44,7 @@
       }).$promise.then(function (suc) {
         console.log('made new group', suc);
         getGroups();
+        $scope.showSimpleToast();
       });
     };
 
@@ -57,6 +58,7 @@
       }).$promise.then(function (suc) {
         console.log('edited group', suc);
         getGroups();
+        $scope.showSimpleToast();
       });
     };
 
@@ -64,8 +66,9 @@
       Group.deleteById({
         id: id
       }).$promise.then(function (suc) {
-        console.log('deleted group', suc)
+        console.log('deleted group', suc);
         $scope.getGroups();
+        $scope.showSimpleToast();
       })
     }
 
@@ -207,7 +210,7 @@
         // .content('Simple Toast!')
         templateUrl: 'app/toast/success.html',
         // .position($scope.getToastPosition())
-        hideDelay: 4000,
+        hideDelay: 2000,
         position: 'top right fit'
       });
     };
