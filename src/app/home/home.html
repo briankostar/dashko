@@ -33,11 +33,15 @@
             </md-input-container>
 
             <div layout>
+              <md-input-container>
+                <md-datepicker ng-model="newDate" md-placeholder="Enter date"></md-datepicker>
+              </md-input-container>
+
               <md-input-container flex>
                 <label>{{group.unit}}s</label>
                 <input ng-model="group.value">
               </md-input-container>
-              <md-button class="md-raised md-primary" aria-label="create log" ng-click="createLog(group.id, group.value, group.comment)">Log</md-button>
+              <md-button class="md-raised md-primary" aria-label="create log" ng-click="createLog(group.id, group.value, group.comment, newDate)">Log</md-button>
           </div>
 
         </md-content>
@@ -45,6 +49,4 @@
     </div>
   </md-content>
 
-  <!-- datepicker:
-  <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker> -->
 </md-content>

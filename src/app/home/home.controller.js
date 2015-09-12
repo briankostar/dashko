@@ -65,13 +65,13 @@
     //   })
     // }
 
-    $scope.createLog = function (id, value, comment) {
+    $scope.createLog = function (id, value, comment, date) {
       Group.logs.create({
         //first obj gets passed as param.
         id: id
       }, {
         //second obj gets passed as payload
-        date: new Date(),
+        date: date,
         // unit: param.unit,
         value: value,
         comment: comment
